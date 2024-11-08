@@ -83,7 +83,7 @@ export default {
           
           if (message.length === 0) {
             socket.emit("new user join your rooms", {
-              room: data.to,
+              user: data.to,
             });
           }
 
