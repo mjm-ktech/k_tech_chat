@@ -430,14 +430,11 @@ export interface ApiRoomChatRoomChat extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    room_id: Schema.Attribute.UID &
-      Schema.Attribute.CustomField<'plugin::strapi-advanced-uuid.uuid'>;
-    seen_status: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     users: Schema.Attribute.Relation<
-      'manyToMany',
+      'oneToMany',
       'plugin::users-permissions.user'
     >;
   };
@@ -941,10 +938,6 @@ export interface PluginUsersPermissionsUser
         'SEO',
         'Sale',
       ]
-    >;
-    room_chats: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::room-chat.room-chat'
     >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

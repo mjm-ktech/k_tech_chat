@@ -65,12 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "room_chats": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::room-chat.room-chat",
-      "mappedBy": "users"
-    },
     "role_user": {
       "type": "enumeration",
       "enum": [
