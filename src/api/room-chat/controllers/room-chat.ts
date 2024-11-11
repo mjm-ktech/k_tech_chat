@@ -9,7 +9,7 @@ export default factories.createCoreController(
   ({ strapi }) => ({
     async getMyRoomChat(ctx) {
       const { id } = ctx.state.user;
-      const roomChat = await strapi.entityService.findMany(
+      const roomChats = await strapi.entityService.findMany(
         "api::room-chat.room-chat",
         {
           populate: {
@@ -26,11 +26,11 @@ export default factories.createCoreController(
           },
         }
       );
-      let result: any = roomChat;
+      let result: any = roomChats;
 
-      if (roomChat.length > 0) {
+      if (roomChats.length > 0) {
         result = await Promise.all(
-          roomChat.map(async (item: any) => {
+          roomChats.map(async (item: any) => {
             const message = await strapi.entityService.findMany(
               "api::message.message",
               {
@@ -39,7 +39,7 @@ export default factories.createCoreController(
                 filters: {
                   room_chat: {
                     id: {
-                      $ne: item.id,
+                      $eq: item.id,
                     },
                   },
                 },
