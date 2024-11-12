@@ -9,13 +9,13 @@ export default factories.createCoreService(
   ({ strapi }) => ({
     async processMessage(data) {
       try {
-        let { to, from, content, media } = data;
+        let { to, from, content, media, file } = data;
         const checkRoomChat = await strapi
           .documents("api::room-chat.room-chat")
           .findOne({
             documentId: to,
           });
-      
+
         if (!checkRoomChat) {
           return;
         }
@@ -33,6 +33,11 @@ export default factories.createCoreService(
         if (media) {
           buildBody.media = {
             id: media,
+          };
+        }
+        if (file) {
+          buildBody.file = {
+            id: file,
           };
         }
         await strapi.documents("api::message.message").create({
