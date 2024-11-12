@@ -39,6 +39,13 @@
     "is_read": {
       "type": "boolean",
       "default": false
+    },
+    "file": {
+      "allowedTypes": [
+        "files"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
