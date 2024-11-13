@@ -68,7 +68,9 @@ export default factories.createCoreController(
     },
     async chat(ctx) {
       const { id } = ctx.state.user;
+
       const { to } = ctx.request.body;
+
       if (!id || !to) {
         return ctx.badRequest("Missing id or to");
       }
@@ -98,7 +100,7 @@ export default factories.createCoreController(
           data: {
             users: [
               {
-                documentId: id,
+                id: id,
               },
               {
                 documentId: to,
