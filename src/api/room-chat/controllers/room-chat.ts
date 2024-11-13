@@ -104,7 +104,7 @@ export default factories.createCoreController(
         return ctx.badRequest("Missing id or to");
       }
       let result;
-      result = await strapi.documents("api::room-chat.room-chat").findMany({
+      result = await strapi.documents("api::room-chat.room-chat").findFirst({
         filters: {
           $and: [
             {
