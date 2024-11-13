@@ -124,7 +124,7 @@ export default factories.createCoreController(
           ],
         },
       });
-      if (result.length === 0) {
+      if (!result) {
         result = await strapi.documents("api::room-chat.room-chat").create({
           data: {
             users: [
