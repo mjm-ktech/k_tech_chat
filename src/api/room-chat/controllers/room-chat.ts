@@ -65,6 +65,23 @@ export default factories.createCoreController(
         );
         // mapping ending message to room chat
       }
+      result.sort((a, b) => {
+        const dateA = a.message?.createdAt ? new Date(a.message.createdAt) : null; // null nếu không có message
+        const dateB = b.message?.createdAt ? new Date(b.message.createdAt) : null;
+      
+        // Nếu cả hai đều không có message, giữ nguyên thứ tự
+        if (!dateA && !dateB) return 0;
+      
+        // Nếu chỉ a không có message, đưa a xuống cuối
+        if (!dateA) return 1;
+      
+        // Nếu chỉ b không có message, đưa b xuống cuối
+        if (!dateB) return -1;
+      
+        // So sánh ngày của a và b, giảm dần (mới nhất trước)
+        return dateB.getTime() - dateA.getTime();
+      });
+      
       return result;
     },
     async chat(ctx) {
