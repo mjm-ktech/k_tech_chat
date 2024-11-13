@@ -24,6 +24,7 @@ export default factories.createCoreController(
               },
             },
           },
+          sort: ["createdAt:desc"],
         }
       );
       let result: any = roomChats;
