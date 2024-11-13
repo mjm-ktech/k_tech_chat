@@ -14,8 +14,14 @@ export default factories.createCoreController(
         {
           populate: {
             users: {
-              fields: ["username"],
+              fields: ["username", "fullname"],
+              populate: {
+                avatar: {
+                  fields: ["url"],
+                },
+              }
             },
+            
           },
           filters: {
             users: {
@@ -27,6 +33,7 @@ export default factories.createCoreController(
           sort: ["createdAt:desc"],
         }
       );
+
       let result: any = roomChats;
 
       if (roomChats.length > 0) {
@@ -66,22 +73,26 @@ export default factories.createCoreController(
         // mapping ending message to room chat
       }
       result.sort((a, b) => {
-        const dateA = a.message?.createdAt ? new Date(a.message.createdAt) : null; // null nếu không có message
-        const dateB = b.message?.createdAt ? new Date(b.message.createdAt) : null;
-      
+        const dateA = a.message?.createdAt
+          ? new Date(a.message.createdAt)
+          : null; // null nếu không có message
+        const dateB = b.message?.createdAt
+          ? new Date(b.message.createdAt)
+          : null;
+
         // Nếu cả hai đều không có message, giữ nguyên thứ tự
         if (!dateA && !dateB) return 0;
-      
+
         // Nếu chỉ a không có message, đưa a xuống cuối
         if (!dateA) return 1;
-      
+
         // Nếu chỉ b không có message, đưa b xuống cuối
         if (!dateB) return -1;
-      
+
         // So sánh ngày của a và b, giảm dần (mới nhất trước)
         return dateB.getTime() - dateA.getTime();
       });
-      
+
       return result;
     },
     async chat(ctx) {
@@ -93,26 +104,26 @@ export default factories.createCoreController(
         return ctx.badRequest("Missing id or to");
       }
       let result;
-      result = await strapi.documents("api::room-chat.room-chat").findMany(
-        {
-          
-          filters: {
-            "$and": [{
+      result = await strapi.documents("api::room-chat.room-chat").findMany({
+        filters: {
+          $and: [
+            {
               users: {
                 id: {
                   $eq: id,
-                }
-              }
-            }, {
+                },
+              },
+            },
+            {
               users: {
                 documentId: {
                   $eq: to,
-                }
-              }
-            }]
-          },
-        }
-      );
+                },
+              },
+            },
+          ],
+        },
+      });
       if (result.length === 0) {
         result = await strapi.documents("api::room-chat.room-chat").create({
           data: {
@@ -128,6 +139,6 @@ export default factories.createCoreController(
         });
       }
       return result;
-    }
+    },
   })
 );
