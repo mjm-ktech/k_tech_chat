@@ -39,10 +39,8 @@ export default factories.createCoreController(
       if (roomChats.length > 0) {
         result = await Promise.all(
           roomChats.map(async (item: any) => {
-            const message = await strapi.entityService.findMany(
-              "api::message.message",
+            const message = await strapi.documents("api::message.message").findFirst(
               {
-                limit: 1,
                 sort: ["createdAt:desc"],
                 filters: {
                   room_chat: {
@@ -72,28 +70,17 @@ export default factories.createCoreController(
         );
         // mapping ending message to room chat
       }
-      result.sort((a, b) => {
-        const dateA = a.message?.createdAt
-          ? new Date(a.message.createdAt)
-          : null; // null nếu không có message
-        const dateB = b.message?.createdAt
-          ? new Date(b.message.createdAt)
-          : null;
-
-        // Nếu cả hai đều không có message, giữ nguyên thứ tự
-        if (!dateA && !dateB) return 0;
-
-        // Nếu chỉ a không có message, đưa a xuống cuối
-        if (!dateA) return 1;
-
-        // Nếu chỉ b không có message, đưa b xuống cuối
-        if (!dateB) return -1;
-
+      await result.sort((a, b) => {
+        // Lấy thời gian của a và b, nếu không có thì mặc định là thời gian xa nhất (new Date(0))
+        const dateA = a.message?.createdAt ? new Date(a.message.createdAt) : new Date(0);
+        const dateB = b.message?.createdAt ? new Date(b.message.createdAt) : new Date(0);
+      
         // So sánh ngày của a và b, giảm dần (mới nhất trước)
         return dateB.getTime() - dateA.getTime();
       });
-
+      
       return result;
+
     },
     async chat(ctx) {
       const { id } = ctx.state.user;
