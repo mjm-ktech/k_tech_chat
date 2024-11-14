@@ -385,7 +385,10 @@ export interface ApiMessageMessage extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    emoji: Schema.Attribute.String;
     file: Schema.Attribute.Media<'files'>;
+    is_deleted: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    is_edited: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     is_read: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -403,6 +406,7 @@ export interface ApiMessageMessage extends Struct.CollectionTypeSchema {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    template_id: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

@@ -21,8 +21,9 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "socket.io": "^4.8.1",
-    "strapi-advanced-uuid": "^2.0.0",
-    "styled-components": "^6.0.0"
+    "strapi-advanced-uuid": "^2.0.1",
+    "styled-components": "^6.0.0",
+    "uuid": "^11.0.3"
   },
   "devDependencies": {
     "@types/node": "^20",

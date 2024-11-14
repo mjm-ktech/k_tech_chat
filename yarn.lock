@@ -10425,6 +10425,11 @@ regenerator-runtime@^0.14.0:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz#356ade10263f685dda125100cd862c1db895327f"
   integrity sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==
 
+regex-randstr@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/regex-randstr/-/regex-randstr-0.0.6.tgz#163a577c08f2b6090b1a9f5d5587d51bd167aa00"
+  integrity sha512-Oywb8BWcnH8nspfc1sZIwy9Z75wUqBaCTCT8m1M4s0exNLUaqGZasIq849R9/XmD0mwo36hLv2Oc2H8E/Zkvdw==
+
 registry-auth-token@^4.0.0:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/registry-auth-token/-/registry-auth-token-4.2.2.tgz#f02d49c3668884612ca031419491a13539e21fac"
@@ -11172,14 +11177,15 @@ stdin-discarder@^0.2.2:
   resolved "https://registry.yarnpkg.com/stdin-discarder/-/stdin-discarder-0.2.2.tgz#390037f44c4ae1a1ae535c5fe38dc3aba8d997be"
   integrity sha512-UhDfHmA92YAlNnCfhmq0VeNL5bDbiZGg7sZ2IvPsXubGkiNa9EC+tUTsjBRsYUAz87btI6/1wf4XoVvQ3uRnmQ==
 
-strapi-advanced-uuid@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/strapi-advanced-uuid/-/strapi-advanced-uuid-2.0.0.tgz#0973e77e76c45d2bbdba0657222ee40101767147"
-  integrity sha512-RNSHKmxoYnOY0Yiu4ez3qAIBZXaru3qspz57nkaAEB/S2ZHzOzWCPuOS487NjkEbAPbHIbZgAOkUHkK3/sTX0Q==
+strapi-advanced-uuid@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/strapi-advanced-uuid/-/strapi-advanced-uuid-2.0.1.tgz#d2622a09f40611c2d5ff11df2ab74691be8c3f06"
+  integrity sha512-vQDNamOMl2ON/5JkD2eAdeIBlg3vH8/YaRYFolULVTDxk4dHOmb9v+l5PNaas2ZGYvhu9B4jPxDs0LDmkz/aSA==
   dependencies:
     "@strapi/design-system" "^2.0.0-rc.11"
     "@strapi/icons" "^2.0.0-rc.11"
     react-intl "^6.8.0"
+    regex-randstr "^0.0.6"
     uuid "^11.0.2"
 
 stream-browserify@3.0.0:
@@ -11898,6 +11904,11 @@ uuid@^11.0.2:
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.0.2.tgz#a8d68ba7347d051e7ea716cc8dcbbab634d66875"
   integrity sha512-14FfcOJmqdjbBPdDjFQyk/SdT4NySW4eM0zcG+HqbHP5jzuH56xO3J1DGhgs/cEMCfwYi3HQI1gnTO62iaG+tQ==
+
+uuid@^11.0.3:
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-11.0.3.tgz#248451cac9d1a4a4128033e765d137e2b2c49a3d"
+  integrity sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==
 
 uuid@^8.3.2:
   version "8.3.2"

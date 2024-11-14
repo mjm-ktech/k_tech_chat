@@ -1,6 +1,7 @@
 import type { Core } from "@strapi/strapi";
 import { Server } from "socket.io";
-
+import { v4 as uuidv4 } from 'uuid';
+uuidv4(); 
 export default {
   /**
    * An asynchronous register function that runs before
@@ -66,9 +67,12 @@ export default {
         
         // forward the private message to the right recipient
         socket.on("private message", async (data) => {
+          const templateId = uuidv4();
           socket.to(data.to).emit("private message", {
             ...data,
             from: socket.user_document_id,
+            template_id: templateId
+
           });
           
           const message = await strapi.documents("api::message.message").findMany(
@@ -91,11 +95,35 @@ export default {
             room: socket.room,
             from: socket.user_document_id,
             ...data,
+            template_id: templateId
           });
 
-         
+          
         });
 
+        socket.on("delete private message", async (data) => {
+          socket.to(data.to).emit("delete private message", {
+            ...data,
+            from: socket.user_document_id,
+          });
+
+          strapi.service("api::message.message").deleteMessage({
+            from: socket.user_document_id,
+            ...data,
+          });
+        });
+        socket.on("edit private message", async (data) => {
+          socket.to(data.to).emit("edit private message", {
+            ...data,
+            from: socket.user_document_id,
+          });
+
+          strapi.service("api::message.message").deleteMessage({
+            room: socket.room,
+            from: socket.user_document_id,
+            ...data,
+          });
+        });
         // notify users upon disconnection
         
       });

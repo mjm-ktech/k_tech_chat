@@ -41,11 +41,26 @@
       "default": false
     },
     "file": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "files"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "is_deleted": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_edited": {
+      "type": "boolean",
+      "default": false
+    },
+    "emoji": {
+      "type": "string"
+    },
+    "template_id": {
+      "type": "string"
     }
   }
 }
