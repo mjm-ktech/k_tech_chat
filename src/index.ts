@@ -67,11 +67,9 @@ export default {
         
         // forward the private message to the right recipient
         socket.on("private message", async (data) => {
-          const templateId = uuidv4();
           socket.to(data.to).emit("private message", {
             ...data,
             from: socket.user_document_id,
-            template_id: templateId
 
           });
           
@@ -95,7 +93,6 @@ export default {
             room: socket.room,
             from: socket.user_document_id,
             ...data,
-            template_id: templateId
           });
 
           
