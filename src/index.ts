@@ -104,7 +104,7 @@ export default {
             from: socket.user_document_id,
           });
 
-          strapi.service("api::message.message").deleteMessage({
+          strapi.service("api::message.message").processDeleteMessage({
             from: socket.user_document_id,
             ...data,
           });
@@ -115,7 +115,7 @@ export default {
             from: socket.user_document_id,
           });
 
-          strapi.service("api::message.message").deleteMessage({
+          strapi.service("api::message.message").processEditMessage({
             room: socket.room,
             from: socket.user_document_id,
             ...data,

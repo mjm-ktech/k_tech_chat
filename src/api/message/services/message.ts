@@ -54,7 +54,8 @@ export default factories.createCoreService(
     async processDeleteMessage(data) {
       try {
         let { template_id, from } = data;
-
+        console.log("template_id", template_id);
+        console.log("from", from);
         const message = await strapi.documents("api::message.message").findFirst({
           filters: {
             template_id: template_id,
